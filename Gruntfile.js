@@ -135,11 +135,28 @@ module.exports = function (grunt) {
             apimock: {
                 proxies: [{
                     context: '/d',
-                    host: 'localhost',
-                    port: 3000,
+                    host: 'jevic.1.vte.cx',
+//                    host: 'localhost',
+                    port: 80,
+//                    port: 3000,
                     https: false,
                     xforward: false,
-                    changeOrigin: false
+                    changeOrigin: true
+//                    changeOrigin: false
+                },{
+                    context: '/p',
+                    host: 'jevic.1.vte.cx',
+                    port: 80,
+                    https: false,
+                    xforward: false,
+                    changeOrigin: true
+                },{
+                    context: '/x',
+                    host: 'jevic.1.vte.cx',
+                    port: 80,
+                    https: false,
+                    xforward: false,
+                    changeOrigin: true
                 }
                 ]
             },
@@ -161,6 +178,13 @@ module.exports = function (grunt) {
                     https: false,
                     xforward: false,
                     changeOrigin: false
+                },{
+                    context: '/d',
+                    host: 'jevic.1.vte.cx',
+                    port: 443,
+                    https: true,
+                    xforward: false,
+                    changeOrigin: true
                 }]
             }
         },
@@ -356,6 +380,9 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
+                        'pdf/*',
+                        'xls/*',
+                        'language/*',
                         '*.html',
                         'views/{,*/}*.html',
                         'bower_components/**/*',
@@ -430,6 +457,22 @@ module.exports = function (grunt) {
             }
         },
 
+        //E2Eテストランナー protractorのタスク設定です。
+        protractor: {
+            options: {
+                configFile: 'node_modules/protractor/docs/referenceConf.js', // Default config file
+                keepAlive: false,
+                noColor: false,
+                args: {}
+            },
+            E2E_local: {
+                options: {
+                    configFile: 'protractor.conf.js',
+                    args: {}
+                }
+            }
+        },
+
         // APIのモックサーバーである"Node Easymock"を起動するためのタスク設定です。
         easymock: {
             api: {
@@ -471,6 +514,66 @@ module.exports = function (grunt) {
         'connect:test',
         'karma'
     ]);
+
+    grunt.registerTask('upload1', function() {
+        console.log('start upload task.');
+        var exec = require('child_process').exec;
+        var done = this.async();
+        var command = './rxcp.sh dist http://jevic.1.vte.cx';
+        var option  = { timeout : 300000 }; // 5 分でタイムアウト
+        var callback = function(error, stdout, stderr) {
+            if(error) {
+                console.log('ERROR', error, stderr);
+                done(false);
+            } else {
+                console.log(stdout);
+                done();
+            }
+        };
+        exec(command, option, callback)
+    });
+
+    grunt.registerTask('upload2', function() {
+        console.log('start upload task.');
+        var exec = require('child_process').exec;
+        var done = this.async();
+        var command = './rxcp.sh  setup http://jevic.1.vte.cx/p nocontent';
+        var option  = { timeout : 300000 }; // 5 分でタイムアウト
+        var callback = function(error, stdout, stderr) {
+            if(error) {
+                console.log('ERROR', error, stderr);
+                done(false);
+            } else {
+                console.log(stdout);
+                done();
+            }
+        };
+        exec(command, option, callback);
+    });
+
+    grunt.registerTask('upload3', function() {
+        console.log('start upload task.');
+        var exec = require('child_process').exec;
+        var done = this.async();
+        var command = './rxcp.sh  userinit http://jevic.1.vte.cx/d';
+        var option  = { timeout : 300000 }; // 5 分でタイムアウト
+        var callback = function(error, stdout, stderr) {
+            if(error) {
+                console.log('ERROR', error, stderr);
+                done(false);
+            } else {
+                console.log(stdout);
+                done();
+            }
+        };
+        exec(command, option, callback)
+    });
+
+    grunt.registerTask('upload', [
+                                    'upload1',
+                                    'upload2',
+                                    'upload3'
+                                    ]);
 
     grunt.registerTask('appBuild', [
         'clean:dist',
