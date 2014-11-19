@@ -135,28 +135,11 @@ module.exports = function (grunt) {
             apimock: {
                 proxies: [{
                     context: '/d',
-                    host: 'jevic.1.vte.cx',
-//                    host: 'localhost',
-                    port: 80,
-//                    port: 3000,
+                    host: 'localhost',
+                    port: 3000,
                     https: false,
                     xforward: false,
-                    changeOrigin: true
-//                    changeOrigin: false
-                },{
-                    context: '/p',
-                    host: 'jevic.1.vte.cx',
-                    port: 80,
-                    https: false,
-                    xforward: false,
-                    changeOrigin: true
-                },{
-                    context: '/x',
-                    host: 'jevic.1.vte.cx',
-                    port: 80,
-                    https: false,
-                    xforward: false,
-                    changeOrigin: true
+                    changeOrigin: false
                 }
                 ]
             },
@@ -178,13 +161,6 @@ module.exports = function (grunt) {
                     https: false,
                     xforward: false,
                     changeOrigin: false
-                },{
-                    context: '/d',
-                    host: 'jevic.1.vte.cx',
-                    port: 443,
-                    https: true,
-                    xforward: false,
-                    changeOrigin: true
                 }]
             }
         },
@@ -513,85 +489,6 @@ module.exports = function (grunt) {
         'autoprefixer',
         'connect:test',
         'karma'
-    ]);
-
-    grunt.registerTask('upload1', function() {
-        console.log('start upload task.');
-        var exec = require('child_process').exec;
-        var done = this.async();
-        var command = './rxcp.sh dist http://jevic.1.vte.cx';
-        var option  = { timeout : 300000 }; // 5 分でタイムアウト
-        var callback = function(error, stdout, stderr) {
-            if(error) {
-                console.log('ERROR', error, stderr);
-                done(false);
-            } else {
-                console.log(stdout);
-                done();
-            }
-        };
-        exec(command, option, callback)
-    });
-
-    grunt.registerTask('upload2', function() {
-        console.log('start upload task.');
-        var exec = require('child_process').exec;
-        var done = this.async();
-        var command = './rxcp.sh  setup http://jevic.1.vte.cx/p nocontent';
-        var option  = { timeout : 300000 }; // 5 分でタイムアウト
-        var callback = function(error, stdout, stderr) {
-            if(error) {
-                console.log('ERROR', error, stderr);
-                done(false);
-            } else {
-                console.log(stdout);
-                done();
-            }
-        };
-        exec(command, option, callback);
-    });
-
-    grunt.registerTask('upload3', function() {
-        console.log('start upload task.');
-        var exec = require('child_process').exec;
-        var done = this.async();
-        var command = './rxcp.sh  userinit http://jevic.1.vte.cx/d';
-        var option  = { timeout : 300000 }; // 5 分でタイムアウト
-        var callback = function(error, stdout, stderr) {
-            if(error) {
-                console.log('ERROR', error, stderr);
-                done(false);
-            } else {
-                console.log(stdout);
-                done();
-            }
-        };
-        exec(command, option, callback)
-    });
-
-    grunt.registerTask('upload', [
-                                    'upload1',
-                                    'upload2',
-                                    'upload3'
-                                    ]);
-
-    grunt.registerTask('appBuild', [
-        'clean:dist',
-        'bower-install',
-        'useminPrepare',
-        'concurrent:dist',
-        'autoprefixer',
-        'concat',
-        'ngmin',
-        'copy:dist',
-        'cdnify',
-        'cssmin',
-        'uglify',
-        'rev',
-        'usemin',
-        'copy:fonts',
-        'htmlmin',
-        'clean:distbower'
     ]);
 
     grunt.registerTask('deploy', ['appBuild','upload']);
