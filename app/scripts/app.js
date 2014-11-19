@@ -1,9 +1,8 @@
 'use strict';
 angular.module('sampleApp', [
-    'ngRoute',
-    'ui.bootstrap'
+     'ui.bootstrap'
 ])
-    .config(function ($provide, $routeProvider, $httpProvider) {
+    .config(function ($provide) {
 
 });
 

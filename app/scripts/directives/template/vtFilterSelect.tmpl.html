@@ -1,0 +1,9 @@
+<div class="input-group" ng-class="ngIsError ? 'has-error' : ''">
+  <input type="text" class="form-control" ng-model="ngModel">
+  <div class="input-group-btn">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="max-height: 150px; overflow: auto;">
+      <li ng-repeat="item in ngSelectedItems | filter:ngModel"><a ng-click="setItem(item)"><span bind-html-unsafe="item.name | typeaheadHighlight:ngModel"></span></a></li>
+    </ul>
+  </div>
+</div>

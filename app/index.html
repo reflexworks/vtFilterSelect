@@ -1,9 +1,9 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html id="ng-app" ng-app="jevicApp" ng-controller="MainCtrl" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html id="ng-app" ng-app="jevicApp" ng-controller="MainCtrl" class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html id="ng-app" ng-app="jevicApp" ng-controller="MainCtrl" class="no-js lt-ie10 lt-ie9"> <![endif]-->
-<!--[if IE 9]>         <html id="ng-app" ng-app="jevicApp" ng-controller="MainCtrl" class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!--> <html id="ng-app" ng-app="jevicApp" ng-controller="MainCtrl" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html id="ng-app" ng-app="sampleApp" ng-controller="MainCtrl" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html id="ng-app" ng-app="sampleApp" ng-controller="MainCtrl" class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html id="ng-app" ng-app="sampleApp" ng-controller="MainCtrl" class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html id="ng-app" ng-app="sampleApp" ng-controller="MainCtrl" class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html id="ng-app" ng-app="sampleApp" ng-controller="MainCtrl" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,9 +32,11 @@
     <![endif]-->
 
     <!-- build:js({.tmp,app}) scripts/vendor.js -->
-    <script src="./bower_components/jquery/dist/jquery.js"></script>
-    <script src="./bower_components/angular/angular.js"></script>
-    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -44,9 +46,11 @@
     <!-- endbuild -->
 
 </head>
-<body>
+<body style="padding: 50px;">
 
-	<vt-filter-select ng-model="inputData" ng-selected-items="inputList" ng-is-error="input_error"></vt-filter-select>
+	<vt-filter-select class="col-sm-3" ng-model="inputData" ng-selected-items="inputList" ng-is-error="input_error"></vt-filter-select>
+	<br />
+	<div>selectValue: <b>{{inputData}}</b></div>
 
 </body>
 </html>

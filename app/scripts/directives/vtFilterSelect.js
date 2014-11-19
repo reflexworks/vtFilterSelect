@@ -1,13 +1,7 @@
-/**
- * Created by taiga on 2014/07/07.
- */
-/**
- * 入力フィルタリング select
- */
 (function () {
     'use strict';
     angular
-    .module('jevicApp')
+    .module('sampleApp')
     .directive('vtFilterSelect',
         function ($timeout, $filter) {
             return {
@@ -66,7 +60,7 @@
                             );
                     };
                 },
-                templateUrl : 'views/template/vtFilterSelect.tmpl.html',
+                templateUrl : 'scripts/directives/template/vtFilterSelect.tmpl.html',
                 link        : function (scope, element, attrs, ngModel) {
                 }
             };
