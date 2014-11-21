@@ -24,7 +24,7 @@ $ cd <vtFilterSelect dir>
 $ git clone https://github.com/reflexworks/vtFilterSelect.git
 ```
 
-### build
+### build & run
 ```bash
 $ cd <vtFilterSelect dir>/
 $ npm install      #install package.json modules
