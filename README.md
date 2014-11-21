@@ -3,7 +3,7 @@
 ## Demo
 http://jsfiddle.net/takeyama/an70xd6d/10/
 
-## 手順
+## インストール手順
 
 ### node module のインストール  
 ```bash
