@@ -1,4 +1,4 @@
-# vtFilterSelect Project
+# AngularJS vtFilterSelect
 
 ## Demo
 http://jsfiddle.net/takeyama/an70xd6d/10/
